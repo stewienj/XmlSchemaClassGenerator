@@ -42,10 +42,6 @@ namespace XmlSchemaClassGenerator
 
         public T Value { get; set; }
 
-        public override CodeAttributeDeclaration GetAttribute()
-        {
-            return null;
-        }
     }
 
     public abstract class ValueTypeRestrictionModel: ValueRestrictionModel<string>
@@ -172,6 +168,12 @@ namespace XmlSchemaClassGenerator
                 return string.Format("Total number of digits: {0}.", Value);
             }
         }
+
+        public override CodeAttributeDeclaration GetAttribute()
+        {
+            return new CodeAttributeDeclaration(CodeUtilities.CreateTypeReference("CustomDataAnnotations", "TotalDigitsAttribute", Configuration),
+                new CodeAttributeArgument(new CodePrimitiveExpression(Value)));
+        }
     }
 
     public class FractionDigitsRestrictionModel : ValueRestrictionModel<int>
@@ -194,6 +196,13 @@ namespace XmlSchemaClassGenerator
                 return string.Format("Total number of digits in fraction: {0}.", Value);
             }
         }
+
+        public override CodeAttributeDeclaration GetAttribute()
+        {
+            return new CodeAttributeDeclaration(CodeUtilities.CreateTypeReference("CustomDataAnnotations", "FractionDigitsAttribute", Configuration),
+                new CodeAttributeArgument(new CodePrimitiveExpression(Value)));
+        }
+
     }
 
     public class PatternRestrictionModel : ValueRestrictionModel<string>
@@ -244,6 +253,13 @@ namespace XmlSchemaClassGenerator
                 return string.Format("Minimum inclusive value: {0}.", Value);
             }
         }
+
+        public override CodeAttributeDeclaration GetAttribute()
+        {
+            return new CodeAttributeDeclaration(CodeUtilities.CreateTypeReference("CustomDataAnnotations", "MinInclusiveAttribute", Configuration),
+                new CodeAttributeArgument(new CodePrimitiveExpression(Value)));
+        }
+
     }
 
     public class MinExclusiveRestrictionModel: ValueTypeRestrictionModel
@@ -266,6 +282,13 @@ namespace XmlSchemaClassGenerator
                 return string.Format("Minimum exclusive value: {0}.", Value);
             }
         }
+
+        public override CodeAttributeDeclaration GetAttribute()
+        {
+            return new CodeAttributeDeclaration(CodeUtilities.CreateTypeReference("CustomDataAnnotations", "MinExclusiveAttribute", Configuration),
+                new CodeAttributeArgument(new CodePrimitiveExpression(Value)));
+        }
+
     }
 
     public class MaxInclusiveRestrictionModel: ValueTypeRestrictionModel
@@ -288,6 +311,13 @@ namespace XmlSchemaClassGenerator
                 return string.Format("Maximum inclusive value: {0}.", Value);
             }
         }
+
+        public override CodeAttributeDeclaration GetAttribute()
+        {
+            return new CodeAttributeDeclaration(CodeUtilities.CreateTypeReference("CustomDataAnnotations", "MaxInclusiveAttribute", Configuration),
+                new CodeAttributeArgument(new CodePrimitiveExpression(Value)));
+        }
+
     }
 
     public class MaxExclusiveRestrictionModel: ValueTypeRestrictionModel
@@ -310,5 +340,12 @@ namespace XmlSchemaClassGenerator
                 return string.Format("Maximum exclusive value: {0}.", Value);
             }
         }
+
+        public override CodeAttributeDeclaration GetAttribute()
+        {
+            return new CodeAttributeDeclaration(CodeUtilities.CreateTypeReference("CustomDataAnnotations", "MaxExclusiveAttribute", Configuration),
+                new CodeAttributeArgument(new CodePrimitiveExpression(Value)));
+        }
+
     }
 }
